@@ -1,6 +1,9 @@
 #include <iostream>
 
 int main() {
-    std::cout << "Hello World!" << std::endl;
+    int my_number = 42;
+    int* my_pointer = &my_number;
+    void* my_other_pointer = &my_pointer;
+    std::cout << my_other_pointer << std::endl;
     return 0;
 }
