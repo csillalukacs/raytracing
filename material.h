@@ -47,7 +47,7 @@ class metal : public material {
             reflected = unit_vector(reflected) + (fuzz * random_unit_vector());
             scattered = ray(rec.p, reflected);
             attenuation = albedo;
-            return true; //dot(scattered.direction(), rec.normal) > 0;
+            return dot(scattered.direction(), rec.normal) > 0;
         }
     private:
         color albedo;
