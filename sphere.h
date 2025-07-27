@@ -5,13 +5,15 @@
 
 class sphere : public hittable {
     public:
-        sphere(const point3& center, double radius) : center(center), radius(std::fmax(0, radius)) {}
+        sphere(const point3& center, double radius, shared_ptr<material> mat) 
+            : center(center), radius(std::fmax(0, radius)), mat(mat) {}
         bool hit(const ray& r, interval ray_t, hit_record& rec) const override {
             vec3 oc = center - r.origin();
             auto a = r.direction().length_squared();
             auto h = dot(oc, r.direction());
             auto c = oc.length_squared() - radius * radius;
             auto discriminant = h * h - a * c;
+            rec.mat = mat;
 
             if (discriminant < 0) {
                 return false;
@@ -39,6 +41,7 @@ class sphere : public hittable {
     private:
         point3 center;
         double radius;
+        shared_ptr<material> mat;
 };
 
 #endif
