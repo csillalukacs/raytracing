@@ -5,6 +5,7 @@
 #include "hittable_list.h"
 #include "material.h"
 #include "sphere.h"
+#include <chrono>
 
 int main()
 {
@@ -65,7 +66,7 @@ int main()
     cam.aspect_ratio = 16.0 / 9.0;
     cam.image_width = 400;
     cam.samples_per_pixel = 100;
-    cam.max_depth = 50;
+    cam.max_depth = 5;
 
     cam.vfov = 20;
     cam.lookfrom = point3(13, 2, 3);
@@ -75,7 +76,10 @@ int main()
     cam.defocus_angle = 0.6;
     cam.focus_dist = 10.0;
 
+    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     cam.render(world);
+    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+    std::clog << "Rendered in: " << std::chrono::duration_cast<std::chrono::seconds> (end - begin).count() << "s" << std::endl;
 
     return 0;
 }
