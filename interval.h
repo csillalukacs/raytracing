@@ -14,6 +14,10 @@ class interval {
             max = a.max >= b.max ? a.max : b.max;
         }
 
+        double size() const {
+            return max - min;
+        }
+
         bool contains(double x) const {
             return min <= x && x <= max;
         }
