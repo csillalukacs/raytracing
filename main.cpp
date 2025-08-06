@@ -9,13 +9,12 @@
 #include "texture.h"
 #include <chrono>
 
-int main()
+void bouncing_spheres()
 {
-
     hittable_list world;
 
-    auto checker = make_shared<checker_texture>(0.32, color(0.2, 0.3, 0.1), color(0.9, 0.9, 0.9));
-    world.add(make_shared<sphere>(point3(0, -1000, 0), 1000, make_shared<lambertian>(checker)));
+    auto ground_material = make_shared<lambertian>(color(0.5, 0.5, 0.5));
+    world.add(make_shared<sphere>(point3(0, -1000, 0), 1000, ground_material));
 
     for (int a = -11; a < 11; a++)
     {
@@ -84,6 +83,8 @@ int main()
     cam.render(world);
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
     std::clog << "Rendered in: " << std::chrono::duration_cast<std::chrono::seconds> (end - begin).count() << "s" << std::endl;
+}
 
-    return 0;
+int main() {
+    bouncing_spheres();
 }
