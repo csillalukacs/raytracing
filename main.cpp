@@ -6,6 +6,7 @@
 #include "hittable_list.h"
 #include "material.h"
 #include "sphere.h"
+#include "texture.h"
 #include <chrono>
 
 int main()
@@ -13,8 +14,8 @@ int main()
 
     hittable_list world;
 
-    auto ground_material = make_shared<lambertian>(color(0.5, 0.5, 0.5));
-    world.add(make_shared<sphere>(point3(0, -1000, 0), 1000, ground_material));
+    auto checker = make_shared<checker_texture>(0.32, color(0.2, 0.3, 0.1), color(0.9, 0.9, 0.9));
+    world.add(make_shared<sphere>(point3(0, -1000, 0), 1000, make_shared<lambertian>(checker)));
 
     for (int a = -11; a < 11; a++)
     {
@@ -69,7 +70,7 @@ int main()
     cam.aspect_ratio = 16.0 / 9.0;
     cam.image_width = 400;
     cam.samples_per_pixel = 100;
-    cam.max_depth = 5;
+    cam.max_depth = 50;
 
     cam.vfov = 20;
     cam.lookfrom = point3(13, 2, 3);
