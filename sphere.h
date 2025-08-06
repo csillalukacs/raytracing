@@ -31,7 +31,6 @@ class sphere : public hittable {
             auto h = dot(oc, r.direction());
             auto c = oc.length_squared() - radius * radius;
             auto discriminant = h * h - a * c;
-            rec.mat = mat;
 
             if (discriminant < 0) {
                 return false;
@@ -52,6 +51,7 @@ class sphere : public hittable {
             rec.p = r.at(rec.t);
             vec3 outward_normal = (rec.p - current_center) / radius;
             rec.set_face_normal(r, outward_normal);
+            rec.mat = mat;
 
             return true;
         }
