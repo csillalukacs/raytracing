@@ -91,7 +91,7 @@ class camera {
                 + ((i + offset.x()) * pixel_delta_u)
                 + ((j + offset.y()) * pixel_delta_v);
             
-            auto ray_origin = (defocus_angle <= 0) ? center : center + defocus_disk_sample();
+            auto ray_origin = (defocus_angle <= 0) ? center : defocus_disk_sample();
             auto ray_direction = pixel_sample - ray_origin;
             auto ray_time = random_double();
 
